@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    platform: nnpia
+    url: http://ip172-18-0-150-cfr1qju3tccg00b7hgk0-80.direct.labs.play-with-docker.com/
+    username: nnpia
+    password: nnpia

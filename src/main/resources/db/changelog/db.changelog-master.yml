@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: app-user-create-1
+      author: david.kyncl
+      changes:
+        - createTable:
+            tableName: app_user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+
+              - column:
+                  name: password
+                  type: varchar(255)
+
+              - column:
+                  name: active
+                  type: bool
+
+              - column:
+                  name: creation_date
+                  type: timestamptz
+
+              - column:
+                  name: update_date
+                  type: timestamptz
