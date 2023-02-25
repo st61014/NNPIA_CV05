@@ -1,22 +1,31 @@
 package cz.upce.fei.NNPIA_CV01.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class AppUser {
     @Id
-    private int userID;
+    private Long userID;
     @Column
     private String username;
     @Column
     private String password;
     @Column
-    private boolean active;
+    private Boolean active;
     @Column
     private LocalDateTime creation_date;
     @Column
     private LocalDateTime update_date;
+    @OneToMany(mappedBy = "author")
+    private List<Task> tasks = Collections.emptyList();
+    @ManyToMany(mappedBy = "users")
+    private List<Role> roles = Collections.emptyList();
 }

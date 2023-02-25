@@ -1,11 +1,15 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /api/v1
+
 spring:
-  jpa:
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-      ddl-auto: validate
   datasource:
-    platform: nnpia
-    url: http://ip172-18-0-150-cfr1qju3tccg00b7hgk0-80.direct.labs.play-with-docker.com/
+    url: jdbc:postgresql://localhost:5432/nnpia
     username: nnpia
     password: nnpia
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.yaml

@@ -1,14 +1,14 @@
 package cz.upce.fei.NNPIA_CV01.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class Task {
     @Id
-    private int taskID;
+    private Long taskID;
     @Column
     private String title;
     @Column
@@ -17,6 +17,8 @@ public class Task {
     private LocalDateTime creation_date;
     @Column
     private LocalDateTime update_date;
-    @Column
-    private int author_id;
+    @ManyToOne
+    @JoinColumn(name="author_id", nullable=false)
+    @ToString.Exclude
+    private AppUser author;
 }
