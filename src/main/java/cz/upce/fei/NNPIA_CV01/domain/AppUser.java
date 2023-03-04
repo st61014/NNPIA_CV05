@@ -2,8 +2,11 @@ package cz.upce.fei.NNPIA_CV01.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +18,9 @@ public class AppUser {
     @Id
     private Long userID;
     @Column
+    @NotNull
+    @NotEmpty
+    @Length(min = 1, max = 255)
     private String username;
     @Column
     private String password;

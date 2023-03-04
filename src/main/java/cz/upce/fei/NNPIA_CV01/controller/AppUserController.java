@@ -5,6 +5,7 @@ import cz.upce.fei.NNPIA_CV01.repository.AppUserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
