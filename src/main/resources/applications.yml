@@ -10,6 +10,11 @@ spring:
     password: nnpia
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   liquibase:
-    change-log: classpath:db/changelog/changelog-master.yaml
+    enabled: false
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+    path: /graphql
