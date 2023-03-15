@@ -2,6 +2,7 @@ package cz.upce.fei.NNPIA_CV05.domain;
 
 import cz.upce.fei.NNPIA_CV05.dto.AppUserResponseDtoV1;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
@@ -32,8 +33,10 @@ public class AppUser {
     @Column
     private LocalDateTime update_date;
     @OneToMany(mappedBy = "author")
+    @EqualsAndHashCode.Exclude
     private List<Task> tasks = Collections.emptyList();
     @ManyToMany(mappedBy = "users")
+    @EqualsAndHashCode.Exclude
     private List<Role> roles = Collections.emptyList();
     public AppUser(Long id, String username, String password, Boolean active, LocalDateTime creationDate, LocalDateTime updateDate) {
         this.userID = id;

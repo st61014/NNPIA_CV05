@@ -3,6 +3,7 @@ package cz.upce.fei.NNPIA_CV05.service;
 import cz.upce.fei.NNPIA_CV05.Example;
 import cz.upce.fei.NNPIA_CV05.domain.AppUser;
 import cz.upce.fei.NNPIA_CV05.repository.AppUserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,14 +20,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppUserServiceTest {
     @Autowired
     private AppUserService appUserService;
-    @MockBean
+    @Autowired
     private AppUserRepository appUserRepository;
 
     @BeforeEach
     void setUp() {
-        Mockito.when(appUserRepository.findById(100L))
-                .thenReturn(Optional.of(
-                        Example.EXISTING_USER));
+
+    }
+
+    @AfterEach
+    void tearDown() {
+        appUserRepository.deleteAll();
     }
 
     @Test
@@ -36,7 +40,7 @@ class AppUserServiceTest {
     //@Test(expected = ResourceNotFoundException.class)
     @Test
     void findById() throws ResourceNotFoundException {
-        var expected = Example.EXISTING_USER;
+        var expected = appUserRepository.save(Example.EXISTING_USER);
         var actual = appUserService.findById(100L);
         assertEquals(expected,actual);
     }
