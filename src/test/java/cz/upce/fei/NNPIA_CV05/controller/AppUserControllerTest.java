@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,7 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:applications.yml")
 class AppUserControllerTest {
-
+    @LocalServerPort
+    private int randomPort;
     @Autowired
     private AppUserRepository appUserRepository;
     @Autowired
@@ -36,14 +38,14 @@ class AppUserControllerTest {
     @Test
     void findUserByIDCode200() throws Exception {
         AppUser user = appUserRepository.save(Example.EXISTING_USER);
-        mockMvc.perform(MockMvcRequestBuilders.get("localhost:" + (int)((Math.random()*3000)+5000) + "/app-user/" + user.getUserID()))
+        mockMvc.perform(MockMvcRequestBuilders.get("localhost:" + randomPort + "/app-user/" + user.getUserID()))
                 .andDo(print()).
                 andExpect(status().isOk());
     }
     @Test
     void findUserByIDCode404() throws Exception {
         AppUser user = appUserRepository.save(Example.EXISTING_USER);
-        mockMvc.perform(MockMvcRequestBuilders.get("localhost:" + (int)((Math.random()*3000)+5000) + "/app-user/" + user.getUserID()))
+        mockMvc.perform(MockMvcRequestBuilders.get("localhost:" + randomPort + "/app-user/" + user.getUserID()))
                 .andDo(print()).
                 andExpect(status().isNotFound());
     }
